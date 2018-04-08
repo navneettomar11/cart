@@ -10,6 +10,8 @@ public interface CategoryService {
 
     List<Category> getSubCategories(String parentId);
 
+    Category getCategoryById(String categoryId);
+
     Category insert(Category category);
 
     Category update(Category category);

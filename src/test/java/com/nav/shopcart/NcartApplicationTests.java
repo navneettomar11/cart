@@ -1,7 +1,5 @@
 package com.nav.shopcart;
 
-import com.nav.shopcart.config.MongoConfig;
-import com.nav.shopcart.dao.CategoryDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

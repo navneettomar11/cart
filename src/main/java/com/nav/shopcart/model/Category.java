@@ -19,13 +19,16 @@ public class Category implements Serializable {
 
     private String description;
 
-    private String parentId;
+    @DBRef
+    private Category parent;
+
+    public Category(){}
 
     @PersistenceConstructor
-    public Category(String name, String description, String parentId){
+    public Category(String name, String description, Category parent){
         this.name = name;
         this.description = description;
-        this.parentId = parentId;
+        this.parent = parent;
     }
 
     public String getId() {
@@ -52,11 +55,11 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public String getParentId() {
-        return parentId;
+    public Category getParent() {
+        return parent;
     }
 
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public void setParent(Category parent) {
+        this.parent = parent;
     }
 }

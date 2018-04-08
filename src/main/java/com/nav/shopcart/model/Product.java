@@ -1,23 +1,33 @@
 package com.nav.shopcart.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 @Document(collection = "product")
-public class Product {
+public class Product implements Serializable{
 
     @Id
     private String id;
 
-    @Indexed(unique = true)
-    private String name;
+    private String pname;
 
     private String description;
 
-    @DBRef(db="category")
+    @DBRef
     private Category category;
+
+    public Product(){}
+
+    @PersistenceConstructor
+    public Product(String pname, String description, Category category){
+        this.pname = pname;
+        this.description = description;
+        this.category = category;
+    }
 
     public String getId() {
         return id;
@@ -27,12 +37,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPname() {
+        return pname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPname(String pname) {
+        this.pname = pname;
     }
 
     public String getDescription() {

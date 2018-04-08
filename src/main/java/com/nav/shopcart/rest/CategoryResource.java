@@ -3,10 +3,7 @@ package com.nav.shopcart.rest;
 import com.nav.shopcart.model.Category;
 import com.nav.shopcart.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-
-import javax.print.attribute.standard.Media;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -20,17 +17,22 @@ public class CategoryResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response getAllCategories(){
-
         return Response.ok(categoryService.getAllCategories()).build();
     }
 
     @GET
-    @Path("{parentId}")
+    @Path("/{categoryId}/subcategories")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response getSubCategories(@PathParam("parentId") String parentId){
+    public Response getSubCategories(@PathParam("categoryId") String parentId){
         return Response.ok(categoryService.getSubCategories(parentId)).build();
     }
 
+    @GET
+    @Path("{categoryId}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Category getCategory(@NotNull @PathParam("categoryId") String categoryId){
+        return categoryService.getCategoryById(categoryId);
+    }
     @POST
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -42,7 +44,7 @@ public class CategoryResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Category update(Category category){
-        return categoryService.update(category);
+         return categoryService.update(category);
     }
 
     @DELETE
