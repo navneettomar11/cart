@@ -9,10 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 
 @Document(collection = "category")
-public class Category implements Serializable {
-
-    @Id
-    private String id;
+public class Category extends Base {
 
     @Indexed(unique = true)
     private String name;
@@ -29,14 +26,6 @@ public class Category implements Serializable {
         this.name = name;
         this.description = description;
         this.parent = parent;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
